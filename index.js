@@ -106,8 +106,8 @@ const matrix = [
 myObj = new ShortestPathBetweenCellsBFS();
 
 //case1, there is no path
-let start = [0, 0];
-let end = [1, 1];
+let start = [0, 2];
+let end = [5, 2];
 console.log('case 1: ');
 myObj.shortestPath(matrix, start, end);
 
