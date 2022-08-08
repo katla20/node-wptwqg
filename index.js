@@ -32,6 +32,7 @@ class ShortestPathBetweenCellsBFS {
       for (let j = 0; j < n; j++) {
         if (matrix[i][j] != 0) {
           cells[i][j] = new Cell(i, j, Number.MAX_VALUE, null);
+          //console.log('35 line => ', cells[i][j]);
         }
       }
     }
@@ -40,6 +41,7 @@ class ShortestPathBetweenCellsBFS {
     var src = cells[sx][sy];
     src.dist = 0;
     queue.push(src);
+    //console.log(' 44 queue', queue);
     var dest = null;
     var p;
     while ((p = queue.shift()) != null) {
@@ -49,13 +51,13 @@ class ShortestPathBetweenCellsBFS {
         break;
       }
       // moving up
-      this.visit(cells, queue, p.x - 1, p.y, p);
+      this.visit(cells, queue, p.x - 1, p.y, p, 'up');
       // moving left
-      this.visit(cells, queue, p.x, p.y - 1, p);
+      this.visit(cells, queue, p.x, p.y - 1, p, 'left');
       // moving down
-      this.visit(cells, queue, p.x + 1, p.y, p);
+      this.visit(cells, queue, p.x + 1, p.y, p, 'down');
       //moving right
-      this.visit(cells, queue, p.x, p.y + 1, p);
+      this.visit(cells, queue, p.x, p.y + 1, p, 'right');
     }
 
     //compose the path if path exists
@@ -68,13 +70,14 @@ class ShortestPathBetweenCellsBFS {
       do {
         path.unshift(p);
       } while ((p = p.prev) != null);
-      console.log(`${path}`);
+      //console.log(`${path}`);
     }
   }
 
   //function to update cell visiting status, Time O(1), Space O(1)
-  visit(cells, queue, x, y, parent) {
+  visit(cells, queue, x, y, parent, direction) {
     //out of boundary
+    console.log('parent', direction, parent);
     if (
       x < 0 ||
       x >= cells.length ||
@@ -85,37 +88,40 @@ class ShortestPathBetweenCellsBFS {
       return;
     }
     //update distance, and previous node
+
     var dist = parent.dist + 1;
     var p = cells[x][y];
+
     if (dist < p.dist) {
       p.dist = dist;
       p.prev = parent;
       queue.push(p);
+      // console.log('100 visit=>', p);
     }
   }
 }
 
 const matrix = [
-  [1, 0, 1, 1, 1, 0],
-  [0, 1, 1, 0, 0, 0],
-  [0, 0, 1, 0, 1, 1],
-  [1, 1, 1, 0, 0, 0],
-  [0, 0, 1, 0, 0, 0],
-  [0, 0, 1, 0, 1, 1],
+  [1, 0, 1, 1, 1],
+  [1, 1, 1, 1, 1],
+  [0, 0, 1, 0, 1],
+  [1, 1, 1, 0, 0],
+  //[0, 0, 1, 0, 0, 0],
+  //[0, 0, 1, 0, 1, 1],
 ];
 myObj = new ShortestPathBetweenCellsBFS();
 
 //case1, there is no path
-let start = [0, 2];
-let end = [5, 2];
+let start = [0, 0];
+let end = [1, 5];
 console.log('case 1: ');
 myObj.shortestPath(matrix, start, end);
 
 //case 2, there is path
-let start1 = [0, 2];
-let end1 = [1, 1];
-console.log('case 2: ');
-myObj.shortestPath(matrix, start1, end1);
+// let start1 = [0, 2];
+// let end1 = [1, 1];
+// console.log('case 2: ');
+// myObj.shortestPath(matrix, start1, end1);
 
 // permutes(permutation: Array<Function>) {
 //   debugger;
