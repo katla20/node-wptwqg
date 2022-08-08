@@ -78,7 +78,7 @@ class ShortestPathBetweenCellsBFS {
   //function to update cell visiting status, Time O(1), Space O(1)
   visit(cells, queue, x, y, parent, direction) {
     //out of boundary
-    //console.log('parent', direction, parent);
+    console.log('parent', direction, parent);
     if (
       x < 0 ||
       x >= cells.length ||
@@ -107,14 +107,12 @@ const matrix = [
   [1, 1, 1, 1, 1],
   [0, 0, 1, 0, 1],
   [1, 1, 1, 0, 0],
-  //[0, 0, 1, 0, 0, 0],
-  //[0, 0, 1, 0, 1, 1],
 ];
 myObj = new ShortestPathBetweenCellsBFS();
 
 //case1, there is no path
 let start = [0, 0];
-let end = [3, 3];
+let end = [1, 4];
 console.log('case 1: ');
 myObj.shortestPath(matrix, start, end);
 
