@@ -14,6 +14,7 @@ class Cell {
 class ShortestPathBetweenCellsBFS {
   //BFS, Time O(n^2), Space O(n^2)
   shortestPath(matrix, start, end) {
+    console.log('end', end);
     var sx = start[0];
     var sy = start[1];
     var dx = end[0];
@@ -68,7 +69,7 @@ class ShortestPathBetweenCellsBFS {
       let path = [];
       p = dest;
       do {
-        console.log('71', path, 'p', p);
+        // console.log('path =>', path, 'p =>', p);
         path.unshift(p);
       } while ((p = p.prev) != null);
       //console.log(`${path}`);
@@ -78,7 +79,7 @@ class ShortestPathBetweenCellsBFS {
   //function to update cell visiting status, Time O(1), Space O(1)
   visit(cells, queue, x, y, parent, direction) {
     //out of boundary
-    console.log('parent', direction, parent);
+    //console.log('parent', direction, parent);
     if (
       x < 0 ||
       x >= cells.length ||
@@ -113,14 +114,8 @@ myObj = new ShortestPathBetweenCellsBFS();
 //case1, there is no path
 let start = [0, 0];
 let end = [1, 4];
-console.log('case 1: ');
+console.log('solucion : ');
 myObj.shortestPath(matrix, start, end);
-
-//case 2, there is path
-// let start1 = [0, 2];
-// let end1 = [1, 1];
-// console.log('case 2: ');
-// myObj.shortestPath(matrix, start1, end1);
 
 // permutes(permutation: Array<Function>) {
 //   debugger;
