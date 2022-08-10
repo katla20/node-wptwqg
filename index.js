@@ -14,7 +14,6 @@ class Cell {
 class ShortestPathBetweenCellsBFS {
   //BFS, Time O(n^2), Space O(n^2)
   shortestPath(matrix, start, end) {
-    console.log('end', end);
     var sx = start[0];
     var sy = start[1];
     var dx = end[0];
@@ -79,7 +78,7 @@ class ShortestPathBetweenCellsBFS {
   //function to update cell visiting status, Time O(1), Space O(1)
   visit(cells, queue, x, y, parent, direction) {
     //out of boundary
-    //console.log('parent', direction, parent);
+    console.log('cell visit', direction, parent);
     if (
       x < 0 ||
       x >= cells.length ||
@@ -98,7 +97,6 @@ class ShortestPathBetweenCellsBFS {
       p.dist = dist;
       p.prev = parent;
       queue.push(p);
-      // console.log('100 visit=>', p);
     }
   }
 }
