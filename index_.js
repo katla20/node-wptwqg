@@ -18,18 +18,21 @@ class adyacentsCellsBFS {
   reconocernodos(matrix, dist = 3) {
     var m = matrix.length;
     var n = matrix[0].length;
-    var dx = 3;
-    var dy = 2;
+    var dx = 1;
+    var dy = 4;
     var cells = [];
-    let id = 0;
+    var clean = [];
+    let k = 0; //contador para determinar objeto iniciar de la cola
     var src = [];
+
     for (let i = 0; i < m; i++) {
       cells[i] = [];
       for (let j = 0; j < n; j++) {
-        if (matrix[i][j] !== 1) {
-          cells[i][j] = new Cell_(i, j, 0, null, null, null, null);
-          id++;
-          if (id == 1) {
+        //console.log(matrix[i][j]);
+        if (matrix[i][j] == 0) {
+          cells[i][j] = new Cell_(i, j, 0, 0, 0, '2', null);
+          k++;
+          if (k == 1) {
             //usar la primera ubicacion desbloqueada
             src = cells[i][j];
             src.dist = 0;
@@ -38,7 +41,7 @@ class adyacentsCellsBFS {
       }
     }
 
-    //console.log('start', src);
+    console.log('cells', cells);
     var queue = [];
     queue.push(src);
     var dest = null;
@@ -60,8 +63,19 @@ class adyacentsCellsBFS {
       this.visit(cells, queue, p.x, p.y + 1, p, 'right');
     }
 
-    //console.log(`queue ${queue}`);
+    if (dest == null) {
+      console.log('there is no path.');
+      return;
+    } else {
+      let path = [];
+      p = dest;
+      do {
+        path.unshift(p); //se agrega el elemento al inicio del array
+      } while ((p = p.prev) != null);
+    }
+    //console.log('path', path);
   }
+
   visit(cells, queue, x, y, parent, direction) {
     //out of boundary
     if (
@@ -77,16 +91,15 @@ class adyacentsCellsBFS {
     //update distance, and previous node
     var dist = parent.dist + 1;
     var p = cells[x][y];
-
-    console.log('dist', dist, p);
-
     p.dir = direction;
+
+    //console.log('dist', dist, p);
 
     if (dist < p.dist) {
       p.dist = dist;
       p.prev = parent;
       queue.push(p);
-      console.log(queue);
+      //console.log('dist < p.dist', queue);
       // console.log(`${JSON.stringify(parent)},`);
     }
   }

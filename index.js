@@ -36,6 +36,8 @@ class ShortestPathBetweenCellsBFS {
         }
       }
     }
+
+    console.log(cells);
     //breadth first search
     var queue = [];
     var src = cells[sx][sy];
