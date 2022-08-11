@@ -41,7 +41,7 @@ class ShortestPathBetweenCellsBFS {
     var src = cells[sx][sy];
     src.dist = 0;
     queue.push(src);
-    //console.log(' 44 queue', queue);
+    console.log(' 44 queue', queue);
     var dest = null;
     var p;
     while ((p = queue.shift()) != null) {
@@ -98,7 +98,7 @@ class ShortestPathBetweenCellsBFS {
       p.dist = dist;
       p.prev = parent;
       queue.push(p);
-      console.log(`${JSON.stringify(parent)},`);
+      // console.log(`${JSON.stringify(parent)},`);
     }
   }
 }
@@ -112,15 +112,11 @@ const matrix = [
 
 myObj = new ShortestPathBetweenCellsBFS();
 
-keylogic = new adyacentsCellsBFS();
-
 //case1, there is no path
 let start = [0, 0];
 let end = [1, 4];
 console.log('solucion : ');
 myObj.shortestPath(matrix, start, end);
-console.log('==================================');
-keylogic.reconocernodos(matrix_);
 
 // permutes(permutation: Array<Function>) {
 //   debugger;
