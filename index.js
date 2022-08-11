@@ -78,7 +78,6 @@ class ShortestPathBetweenCellsBFS {
   //function to update cell visiting status, Time O(1), Space O(1)
   visit(cells, queue, x, y, parent, direction) {
     //out of boundary
-    console.log(`{${JSON.stringify(parent)}}`);
     if (
       x < 0 ||
       x >= cells.length ||
@@ -93,11 +92,13 @@ class ShortestPathBetweenCellsBFS {
     var dist = parent.dist + 1;
     var p = cells[x][y];
 
+    p.dir = direction;
+
     if (dist < p.dist) {
       p.dist = dist;
       p.prev = parent;
-      p.dir = direction;
       queue.push(p);
+      console.log(`{${JSON.stringify(parent)}}`);
     }
   }
 }
