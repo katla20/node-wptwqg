@@ -11,6 +11,40 @@ class Cell {
   }
 }
 
+class Cell_ {
+  constructor(x, y, dist, prev, next, nronei) {
+    this.x = x;
+    this.y = y;
+    this.dist = dist; //distance
+    this.prev = prev; //parent cell in the path
+    this.next = next;
+    this.nronei = 0;
+    this.state = 2;
+  }
+
+  toString() {
+    return '(' + this.x + ', ' + this.y + ')';
+  }
+}
+
+class adyacentsCellsBFS {
+  reconocernodos(matrix, dist = 3) {
+    var m = matrix.length;
+    var n = matrix[0].length;
+    var cells = [];
+    for (let i = 0; i < m; i++) {
+      cells[i] = [];
+      for (let j = 0; j < n; j++) {
+        if (matrix[i][j] != 1) {
+          //console.log(`{${JSON.stringify(parent)}}`);
+          cells[i][j] = new Cell(i, j, 0, null, null);
+          console.log(i, j, 0, cells[i][j]);
+        }
+      }
+    }
+  }
+}
+
 class ShortestPathBetweenCellsBFS {
   //BFS, Time O(n^2), Space O(n^2)
   shortestPath(matrix, start, end) {
@@ -98,7 +132,7 @@ class ShortestPathBetweenCellsBFS {
       p.dist = dist;
       p.prev = parent;
       queue.push(p);
-      console.log(`{${JSON.stringify(parent)}}`);
+      console.log(`${JSON.stringify(parent)},`);
     }
   }
 }
@@ -109,13 +143,25 @@ const matrix = [
   [0, 0, 1, 0, 1],
   [1, 1, 1, 0, 0],
 ];
+
+const matrix_ = [
+  [0, 1, 0, 0, 0],
+  [0, 0, 0, 0, 0],
+  [1, 1, 0, 1, 0],
+  [0, 0, 0, 1, 1],
+];
+
 myObj = new ShortestPathBetweenCellsBFS();
+
+keylogic = new adyacentsCellsBFS();
 
 //case1, there is no path
 let start = [0, 0];
 let end = [1, 4];
 console.log('solucion : ');
 myObj.shortestPath(matrix, start, end);
+console.log('==================================');
+keylogic.reconocernodos(matrix_);
 
 // permutes(permutation: Array<Function>) {
 //   debugger;
