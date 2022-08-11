@@ -12,14 +12,14 @@ class Cell {
 }
 
 class Cell_ {
-  constructor(x, y, dist, prev, next, nronei) {
+  constructor(x, y, dist, prev, next, state, direction) {
     this.x = x;
     this.y = y;
     this.dist = dist; //distance
     this.prev = prev; //parent cell in the path
     this.next = next;
-    this.nronei = 0;
-    this.state = 2;
+    this.state = state;
+    this.direction = direction;
   }
 
   toString() {
@@ -37,7 +37,7 @@ class adyacentsCellsBFS {
       for (let j = 0; j < n; j++) {
         if (matrix[i][j] != 1) {
           //console.log(`{${JSON.stringify(parent)}}`);
-          cells[i][j] = new Cell(i, j, 0, null, null);
+          cells[i][j] = new Cell(i, j, 0, null, null, null, null);
           console.log(i, j, 0, cells[i][j]);
         }
       }
